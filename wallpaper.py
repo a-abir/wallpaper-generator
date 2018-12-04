@@ -180,20 +180,22 @@ class Circles:
     def circle_lining(self, reps):
         list_start_time = time.time()
 
-        list(map(lambda _: list(map(lambda width: list(map(lambda height: self.draw.ellipse(
-            [
-                round(width-round(sum(self.pix[(width, height)]) /
-                                  self.circle_radius_factor)*math.cos(90+45)),
-                round(height-round(sum(self.pix[(width, height)]) /
-                                   self.circle_radius_factor)*math.cos(95+45)),
-                round(width+round(sum(self.pix[(width, height)]) /
-                                  self.circle_radius_factor)*math.cos(300+45)),
-                round(height+round(sum(self.pix[(width, height)]) /
-                                   self.circle_radius_factor)*math.cos(300+45))
-            ],
-
-            outline=self.pix[(width, height)], fill=self.pix[(width, height)]),
-            range(self.size[1]))), range(self.size[0]))), range(reps)))
+        list(map(lambda width:
+                 list(map(lambda height:
+                          self.draw.ellipse([
+                              round(
+                                  width - round(sum(self.pix[width, height])/self.circle_radius_factor) * math.cos(randint(0, 360))),
+                              round(
+                                  height - round(sum(self.pix[width, height])/self.circle_radius_factor) * math.cos(randint(0, 360))),
+                              round(
+                                  width+round(sum(self.pix[width, height])/self.circle_radius_factor) * math.cos(randint(0, 360))),
+                              round(
+                                  height+round(sum(self.pix[width, height])/self.circle_radius_factor) * math.cos(randint(0, 360)))
+                          ],
+                              outline=self.pix[width, height],
+                              fill=self.pix[width, height]),
+                          range(self.size[1]))),
+                 range(self.size[0])))
 
         print('List Comprehension finished in', time.time()-list_start_time)
 
@@ -232,7 +234,7 @@ if __name__ == '__main__':
         list(map(lambda x: putToScreen.drawPolygon(), range(putToScreen.repetition)))
 
         wall_num += 1
-        cool_images = Lines(putToScreen.return_im())
+        cool_images = Circles(Lines(putToScreen.return_im()).return_im())
 
         if not os.path.exists(walls_directory):
             os.makedirs(walls_directory)
