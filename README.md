@@ -1,14 +1,30 @@
 # Wallpaper
 Create random polygon wallpapers
 
+Install Required Modules:
+```bash
+pip install pillow
+
+pip install colorama
+pip install termcolor
+```
+
+```bash
+mkdir Wallie
+cd Wallie
+git clone https://github.com/Atikul10152002/Wallpaper.git
+cd Wallpaper
+python wallpaper.py
+ls walls
+```
+
 <hr></hr>
-Modules 
-<ul>
-  <li>os</ls>
-  <li>sys</ls>
-  <li>math</ls>
-  <li>time</ls>
-  <li>pillow</ls>
-  <li>random</ls>
-  <li>termcolor</ls>
-</ul>
+Modules :
+
+```python
+
+pillow = "*required*"
+
+colorama = "optional"
+termcolor = "optional"
+```
