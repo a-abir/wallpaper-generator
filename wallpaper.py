@@ -9,7 +9,7 @@ import os
 import sys
 import math
 import time
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter
 import random
 from random import randint
 from termcolor import cprint
@@ -162,57 +162,47 @@ class Circles:
 
     def __init__(self, filename):
         self.filename = filename
-        self.image = self.im = filename
-        # self.im = self.image.filter(ImageFilter.GaussianBlur(radius=10))
+        self.image = self.im = self.filename
+        self.im = self.image.filter(ImageFilter.GaussianBlur(radius=5))
         self.pix = self.im.load()
         self.size = self.im.size
-        self.circle_radius_factor = 50
-        self.blank_image = Image.new(
-            'RGB', (self.size[0], self.size[1]), color=(0, 0, 0, 0))
-        self.draw = ImageDraw.Draw(self.blank_image)
+        self.line_wid: int = 1
+        self.circle_radius_factor = 10
+        self.division = 5
+        self.blank_image = self.image
+        # self.blank_image = Image.new(
+        # 'RGB', (self.size[0], self.size[1]), color=(0, 0, 0, 0))
+        self.draw = ImageDraw.Draw(self.image)
         print('circle_radius_factor : ', self.circle_radius_factor)
         print('size : ', self.size)
-        self.circle_lining(reps=1)
-        self.finishing_touch()
+
+        self.circle_lining()
 
     def __repr__(self): return f"Cools({self.filename})"
 
-    def circle_lining(self, reps):
+    def circle_lining(self):
         list_start_time = time.time()
 
         list(map(lambda width:
                  list(map(lambda height:
-                          self.draw.ellipse([
-                              round(
-                                  width - round(sum(self.pix[width, height])/self.circle_radius_factor) * math.cos(randint(0, 360))),
-                              round(
-                                  height - round(sum(self.pix[width, height])/self.circle_radius_factor) * math.cos(randint(0, 360))),
-                              round(
-                                  width+round(sum(self.pix[width, height])/self.circle_radius_factor) * math.cos(randint(0, 360))),
-                              round(
-                                  height+round(sum(self.pix[width, height])/self.circle_radius_factor) * math.cos(randint(0, 360)))
-                          ],
-                              outline=self.pix[width, height],
-                              fill=self.pix[width, height]),
-                          range(self.size[1]))),
-                 range(self.size[0])))
+                          self.draw.ellipse(
+                              [
+                                  round(
+                                      width * self.division - round(sum(self.pix[width * self.division, height * self.division])/self.circle_radius_factor) * math.cos(randint(0, 360))),
+                                  round(
+                                      height * self.division - round(sum(self.pix[width * self.division, height * self.division])/self.circle_radius_factor) * math.cos(randint(0, 360))),
+                                  round(
+                                      width * self.division+round(sum(self.pix[width * self.division, height * self.division])/self.circle_radius_factor) * math.cos(randint(0, 360))),
+                                  round(
+                                      height * self.division+round(sum(self.pix[width * self.division, height * self.division])/self.circle_radius_factor) * math.cos(randint(0, 360)))
+                              ],
+                              outline=self.pix[width * self.division,
+                                               height * self.division],
+                              fill=self.pix[width * self.division, height * self.division]),
+                          range(self.size[1]//self.division))),
+                 range(self.size[0]//self.division)))
 
         print('List Comprehension finished in', time.time()-list_start_time)
-
-    def finishing_touch(self):
-        data = list(self.blank_image.getdata())
-        for w in range(len(data)):
-            if w < len(data)-10 and w > 10 and sum(data[w]) < 5:
-                for i in range(10):
-                    if sum(data[w+i]) > 5:
-                        data[w] = data[w+i]
-                        break
-                    elif sum(data[w-i]) > 5:
-                        data[w] = data[w-i]
-                        break
-                    else:
-                        continue
-        self.blank_image.putdata(data)
 
     def return_im(self):
         return self.blank_image
