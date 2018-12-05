@@ -25,81 +25,83 @@ class DrawingInImage:
     """
 
     def __init__(self):
-        self.arg_names = [
-            'Command',
-            'scree_width',
-            'screen_height',
-            'repetition'
-        ]
-        self.args = dict(zip(self.arg_names, sys.argv))
-        self.width = int(sys.argv[1]) if 'scree_width' and 'screen_height' \
-            in self.args.keys() else DEFAULT_WALL_WIDTH
-        self.height = int(sys.argv[2]) if 'scree_width' and 'screen_height' \
-            in self.args.keys() else DEFAULT_WALL_HEIGHT
-        self.repetition = int(
-            sys.argv[3]) if 'repetition' in self.args.keys() else 10
+
+        self.width = DEFAULT_WALL_WIDTH
+        self.height = DEFAULT_WALL_HEIGHT
+        self.repetition = 10
         self.box_width = 5
         self.box_height = 5
-        self.im = Image.new('RGB',
-                            (self.width, self.height),
-                            color=(0, 0, 0))
-        self.draw = ImageDraw.Draw(self.im)
+        self.blank_image = Image.new('RGB',
+                                     (self.width, self.height),
+                                     color=(0, 0, 0))
+        self.draw = ImageDraw.Draw(self.blank_image)
 
-    def drawLine(self):
+        self.drawPolygon(10)
+        
+    def __repr__(self): return f"{type(self).__name__}()"
+
+    def drawLine(self, reps):
         """
         Draws a line with random x and y coordinate
         """
-        self.x_val = random.triangular(-5, self.width)
-        self.y_val = random.triangular(-5, self.height)
-        self.x2_val = self.x_val + random.randrange(self.box_width)
-        self.y2_val = self.y_val + random.randrange(self.box_height)
-        self.draw.line([self.x_val, self.y_val, self.x2_val, self.y2_val],
-                       fill=(
-            random.randrange(255),
-            random.randrange(255),
-            random.randrange(255)),
-            width=1
-        )
+        for _ in range(reps):
 
-    def drawPoint(self):
-        self.x_val = random.triangular(-5, self.width)
-        self.y_val = random.triangular(-5, self.height)
-        self.x2_val = self.x_val + random.randrange(self.box_width)
-        self.y2_val = self.y_val + random.randrange(self.box_height)
-        self.draw.point([self.x_val, self.y_val, self.x2_val, self.y2_val],
-                        fill=(
-            random.randrange(255),
-            random.randrange(255),
-            random.randrange(255)),
-        )
+            self.x_val = random.triangular(-5, self.width)
+            self.y_val = random.triangular(-5, self.height)
+            self.x2_val = self.x_val + random.randrange(self.box_width)
+            self.y2_val = self.y_val + random.randrange(self.box_height)
+            self.draw.line([self.x_val, self.y_val, self.x2_val, self.y2_val],
+                           fill=(
+                random.randrange(255),
+                random.randrange(255),
+                random.randrange(255)),
+                width=1
+            )
 
-    def drawPolygon(self):
-        self.x_val = random.triangular(-5, self.width)
-        self.y_val = random.triangular(-5, self.height)
-        self.x2_val = self.x_val + random.randrange(self.box_width)
-        self.y2_val = self.y_val + random.randrange(self.box_height)
-        self.draw.polygon(
-            [
-                random.choice([self.x_val*2, -self.x_val]),
-                random.choice([self.y_val*2, -self.y_val]),
-                random.choice([self.x2_val//2, -self.x2_val]),
-                random.choice([self.y2_val//2, -self.y2_val]),
-                random.choice([-self.y_val*2, self.y_val*2]),
-                random.choice([-self.x_val*2, self.x_val*2]),
-                random.choice([-self.y_val//2, self.y_val*2]),
-                random.choice([-self.x_val//2, self.x_val//2])
-            ],
-            fill=(
-                round(random.randrange(0, 200)),
-                round(random.randrange(0, 255)),
-                round(random.randrange(0, 255))
-            ))
+    def drawPoint(self, reps):
+        for _ in range(reps):
+            self.x_val = random.triangular(-5, self.width)
+            self.y_val = random.triangular(-5, self.height)
+            self.x2_val = self.x_val + random.randrange(self.box_width)
+            self.y2_val = self.y_val + random.randrange(self.box_height)
+            self.draw.point([self.x_val, self.y_val, self.x2_val, self.y2_val],
+                            fill=(
+                random.randrange(255),
+                random.randrange(255),
+                random.randrange(255)),
+            )
+
+    def drawPolygon(self, reps):
+        for _ in range(reps):
+            self.x_val = random.triangular(-5, self.width)
+            self.y_val = random.triangular(-5, self.height)
+            self.x2_val = self.x_val + random.randrange(self.box_width)
+            self.y2_val = self.y_val + random.randrange(self.box_height)
+            self.draw.polygon(
+                [
+                    random.choice([self.x_val*2, -self.x_val]),
+                    random.choice([self.y_val*2, -self.y_val]),
+                    random.choice([self.x2_val//2, -self.x2_val]),
+                    random.choice([self.y2_val//2, -self.y2_val]),
+                    random.choice([-self.y_val*2, self.y_val*2]),
+                    random.choice([-self.x_val*2, self.x_val*2]),
+                    random.choice([-self.y_val//2, self.y_val*2]),
+                    random.choice([-self.x_val//2, self.x_val//2])
+                ],
+                fill=(
+                    round(random.randrange(0, 200)),
+                    round(random.randrange(0, 255)),
+                    round(random.randrange(0, 255))
+                ))
 
     def return_im(self):
-        return self.im
+        return self.blank_image
+
+    def save(self, filename):
+        self.blank_image.save(filename)
 
 
-class Lines():
+class Lines(DrawingInImage):
     """
     Filter_imag("626201613142.png")
     """
@@ -150,14 +152,8 @@ class Lines():
         print("List Comprehension finished in", str(
             (time.time()-list_start_time)/60)[:4], " minutes")
 
-    def return_im(self):
-        return self.blank_image
 
-    def save(self, filename):
-        self.blank_image.save(filename)
-
-
-class Circles:
+class Circles(DrawingInImage):
     """Circles("626201613142.png")"""
 
     def __init__(self, filename):
@@ -167,7 +163,7 @@ class Circles:
         self.pix = self.im.load()
         self.size = self.im.size
         self.line_wid: int = 1
-        self.circle_radius_factor = 10
+        self.circle_radius_factor = 20
         self.division = 5
         self.blank_image = self.image
         # self.blank_image = Image.new(
@@ -178,7 +174,6 @@ class Circles:
 
         self.circle_lining()
 
-    def __repr__(self): return f"Cools({self.filename})"
 
     def circle_lining(self):
         list_start_time = time.time()
@@ -204,12 +199,6 @@ class Circles:
 
         print('List Comprehension finished in', time.time()-list_start_time)
 
-    def return_im(self):
-        return self.blank_image
-
-    def save(self, filename):
-        self.blank_image.save(filename)
-
 
 current_wd = os.path.dirname(os.path.realpath(sys.argv[0]))
 walls_directory = os.path.join(current_wd, "walls")
@@ -220,8 +209,6 @@ if __name__ == '__main__':
     for i in range(10):
         # list(map(lambda x: putToScreen.drawLine(), range(500)))
         putToScreen = DrawingInImage()
-
-        list(map(lambda x: putToScreen.drawPolygon(), range(putToScreen.repetition)))
 
         wall_num += 1
         cool_images = Circles(Lines(putToScreen.return_im()).return_im())
@@ -234,6 +221,5 @@ if __name__ == '__main__':
 
         cool_images.save(filename)
 
-    cprint(putToScreen.args, color='grey', attrs=["bold", "dark"])
     cprint(
         f"Successfully created {wall_num} random wallpapers", on_color='on_green')
