@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-___________BY MOHAMMD ISLAM
+___________BY MOHAMMAD ISLAM
 """
 
 from __future__ import print_function
@@ -17,11 +17,18 @@ try:
 except:
     cprint = print
 
+
 # DEFAULT_WALL_WIDTH = 1280
 # DEFAULT_WALL_HEIGHT = 800
 
-DEFAULT_WALL_WIDTH = 1920
-DEFAULT_WALL_HEIGHT = 1080
+# DEFAULT_WALL_WIDTH = 1920
+# DEFAULT_WALL_HEIGHT = 1080
+
+DEFAULT_WALL_WIDTH = 515
+DEFAULT_WALL_HEIGHT = 915
+
+
+
 #DEFAULT_COLORS = [(255,0,0),(0,255,0),(0,0,255)]
 DEFAULT_COLORS = []
 
