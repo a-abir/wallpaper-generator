@@ -1,5 +1,5 @@
 # Wallpaper
-Create random polygon wallpapers
+Create random wallpapers using the Python Imaging Lib
 
 Install Required Modules:
 ```bash
