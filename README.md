@@ -2,7 +2,7 @@
 Create random wallpapers using the Python Imaging Lib
 
 Install Required Modules:
-```bash
+```python
 # Installing the Python Image Lib
 pip install pillow
 
