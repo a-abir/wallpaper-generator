@@ -17,8 +17,9 @@ mkdir Wallie
 cd Wallie
 
 # clone the project
-git clone https://github.com/Atikul10152002/Wallpaper.git
-cd Wallpaper
+# git clone https://github.com/Atikul10152002/Wallpaper.git
+# cd Wallpaper
+curl  https://raw.githubusercontent.com/atikul99/Wallpaper/master/wallpaper.py >> wallpaper.py
 
 # run the python file
 python wallpaper.py
