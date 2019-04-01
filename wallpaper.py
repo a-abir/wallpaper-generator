@@ -50,7 +50,7 @@ class DrawingInImage:
         self.draw = ImageDraw.Draw(self.blank_image)
 
         self.drawPolygon(20)
-        
+
     def __repr__(self): return f"{type(self).__name__}()"
 
     def random_color(self): return (round(randrange(0, 255)),
@@ -164,7 +164,7 @@ class Lines(DrawingInImage):
 
 
 class Circles(DrawingInImage):
-    """Circles("626201613142.png")"""
+    """Circles("input.png")"""
 
     def __init__(self, filename):
         self.filename = filename
