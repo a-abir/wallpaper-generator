@@ -1,7 +1,10 @@
 # Wallpaper
 Create random wallpapers using the Python Imaging Lib
 
-Install Required Modules:
+## Install Required Modules:
+
+Just `copy & paste` into terminal and hit enter. Enjoy!
+
 ```bash
 # Installing the Python Image Lib
 pip install --user pillow
@@ -17,24 +20,23 @@ mkdir Wallie
 cd Wallie
 
 # clone the project
-git clone https://github.com/Atikul10152002/Wallpaper.git
+git clone https://github.com/a-abir/Wallpaper.git
 cd Wallpaper
 
 # Only download the file: 
-# curl  https://raw.githubusercontent.com/atikul99/Wallpaper/master/wallpaper.py >> wallpaper.py
+# curl  https://raw.githubusercontent.com/a-abir/Wallpaper/master/wallpaper.py >> wallpaper.py
 
 # run the python file
 python wallpaper.py
 ls walls
 ```
 
-<hr></hr>
-Modules :
+## Sample Wallpapers:
 
-```python
+<img src="https://github.com/a-abir/Wallpaper/blob/master/wall2.png?raw=true">
 
-pillow = "*required*"
+---
+<img src="https://github.com/a-abir/Wallpaper/blob/master/wall7.png?raw=true" width="50%"><img src="https://github.com/a-abir/Wallpaper/blob/master/wall3.png?raw=true" width="50%">
+---
+<img src="https://github.com/a-abir/Wallpaper/blob/master/wall5.png?raw=true" width="50%"><img src="https://github.com/a-abir/Wallpaper/blob/master/wall6.png?raw=true" width="50%">
 
-colorama = "optional"
-termcolor = "optional"
-```
