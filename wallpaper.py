@@ -12,10 +12,6 @@ import time
 from PIL import Image, ImageDraw, ImageFilter
 # import random
 from random import randint, randrange, triangular, choice
-try:
-    from termcolor import cprint
-except:
-    cprint = print
 
 
 DEFAULT_WALL_WIDTH = 1280
@@ -28,9 +24,9 @@ DEFAULT_WALL_HEIGHT = 800
 # DEFAULT_WALL_HEIGHT = 915
 
 
-
 #DEFAULT_COLORS = [(255,0,0),(0,255,0),(0,0,255)]
 DEFAULT_COLORS = []
+
 
 class DrawingInImage:
     """
@@ -68,9 +64,9 @@ class DrawingInImage:
             self.x2_val = self.x_val + randrange(self.box_width)
             self.y2_val = self.y_val + randrange(self.box_height)
             self.draw.line([self.x_val, self.y_val, self.x2_val, self.y2_val],
-                fill=self.random_color(),
-                width=1
-            )
+                           fill=self.random_color(),
+                           width=1
+                           )
 
     def drawPoint(self, reps):
         """
@@ -82,8 +78,8 @@ class DrawingInImage:
             self.x2_val = self.x_val + randrange(self.box_width)
             self.y2_val = self.y_val + randrange(self.box_height)
             self.draw.point([self.x_val, self.y_val, self.x2_val, self.y2_val],
-            fill=self.random_color(),
-            )
+                            fill=self.random_color(),
+                            )
 
     def drawPolygon(self, reps):
         for _ in range(reps):
@@ -113,7 +109,7 @@ class DrawingInImage:
 
 class Lines(DrawingInImage):
     """
-    Filter_imag("626201613142.png")
+    Filter_imag("input.png")
     """
 
     def __init__(self, filename):
@@ -184,7 +180,6 @@ class Circles(DrawingInImage):
 
         self.circle_lining()
 
-
     def circle_lining(self):
         list_start_time = time.time()
 
@@ -216,20 +211,19 @@ walls_directory = os.path.join(current_wd, "walls")
 
 if __name__ == '__main__':
     wall_num = 0
-    for i in range(10):
+    for i in range(5):
         # list(map(lambda x: putToScreen.drawLine(), range(500)))
-        putToScreen = DrawingInImage()
 
         wall_num += 1
-        cool_images = Circles(Lines(putToScreen.return_im()).return_im())
+        cool_images = Circles(Lines(DrawingInImage().return_im()).return_im())
 
         if not os.path.exists(walls_directory):
             os.makedirs(walls_directory)
         filename = os.path.join(walls_directory, f'wall{wall_num}.png')
-        cprint(str(f"{wall_num:05}") + "-"*(10-len(str(wall_num))) +
-               f'wall{wall_num}.png', color="blue")
+        print(str(f"{wall_num:05}") + "-"*(10-len(str(wall_num))) +
+              f'wall{wall_num}.png\n')
 
         cool_images.save(filename)
 
-    cprint(
-        f"Successfully created {wall_num} random wallpapers", on_color='on_green')
+    print(
+        f"\nSuccessfully created {wall_num} random wallpapers\n")
