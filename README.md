@@ -22,8 +22,8 @@ mkdir Wallie
 cd Wallie
 
 # clone the project
-git clone https://github.com/a-abir/Wallpaper.git
-cd Wallpaper
+git clone https://github.com/a-abir/wallpaper-generator.git
+cd wallpaper-generator
 
 # Only download the file: 
 # curl  https://raw.githubusercontent.com/a-abir/Wallpaper/master/wallpaper.py >> wallpaper.py
