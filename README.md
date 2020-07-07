@@ -11,12 +11,6 @@ Just `copy & paste` into terminal and hit enter. Enjoy!
 # Installing the Python Image Lib
 pip install --user pillow
 
-# Optional Installs for colored CLI outputs
-pip install --user colorama
-pip install --user termcolor
-```
-
-```bash
 # make folder "Wallie"
 # mkdir Wallie
 # cd Wallie
