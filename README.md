@@ -1,4 +1,4 @@
-# Wallpaper
+# Wallpaper-generator
 Python-script that generates random wallpapers using the Python Imaging Lib (PIL)
 
 <small>Random Wallpaper Generator using Python</small>
